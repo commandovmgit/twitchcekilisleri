@@ -1,0 +1,44 @@
+{
+    "name": "Twitch Çekilişleri",
+    "description": "Twitch yayıncıları için harikulade bir çekiliş oluşturma aracı.",
+    "version": "2.5",
+    "manifest_version": 2,
+    "icons": {
+        "16": "icon_16.png",
+        "48": "icon_48.png",
+        "128": "icon_128.png"
+    },
+    "permissions": [
+        "storage",
+        "*://*.twitch.tv/*",
+        "https://twitch.tv/*",
+        "*://*.jtvnw.net/*",
+        "http://www.w3.org/*"
+    ],
+    "content_security_policy": "script-src 'self' 'unsafe-eval';object-src 'self';",
+    "browser_action": {
+        "default_popup": "popup.html"
+    },
+    "options_ui": {
+        "page": "options.html",
+        "chrome_style": true
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*.twitch.tv/*"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "run_at": "document_end",
+            "all_frames": true
+        }
+    ],
+    "key": "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDP4Zje4imToy62BKD/FOh6FoiMabMyyRPu9YpDoLp66vau0iZqineLqSm1tkSGZeIIRsfNDWJUddtHUXZnW1GtfnGsk55GuCSbPXj3BGDbvyy6RMgOtFzLPr0SDgrIGfQbNZd1SYG5LloWx+xcWNV7OwlzNCZAx5vqdacDMWHOXyzUrXva3U6ZSmBle1NUg4CjhFLdsVSB1qTm7Czo/bXsqQ4BnJabNlGlTVx9XCoNnWUDDVd7xBpIbnLpq0eAYvnO1O7DkgCraCCFoQaOqBT2AdUkQN/2fewUsUy1wwGBBAhkJQagU7r3sn9inL8epCooWW3t3fJ471XKjkRhlcTzAgMBAAECggEAT23irF78BeZXBcNVBMInZebQO95zUxdTn32AXADA4BCBOyEe/pxzuxBi2ISRQE0ThZgN5cKUbLMvmtt8g1d4KPNkWc15r4nSquJdIv0wSSaN34pCaqPtxNbvBUQKSJTqGa9rdKwmfexBDe1L2akzwMc5ACTP7PaYE4jqzKSEu4YfkXt/+tRd6jn0Y0pxh+bZiTVUu+7+DkzEn5AO787EMFu6jDyyXRKLsG2zf4IXBF7Y65PD63Znb1XrgexXfYaelZmk7lg79FzJAg+1GrYMkx8xh01VM6IjmZfhpHsb0nzb7nrjWXvnEGbagIZEjH991CE1CM9pfWV1jnlM24WskQKBgQD0rAv1Zum3+oSc1AZ3HpGnwmhtmi+21PSSZu+5HdV/Iar0IeuN0gYDglJNXvXeMg4j/VE/0/di09j9CrYvvCdco02htyy4ywqgoZE/OUewdHtOXTmDQVHxHSnURrDr5m0HJ799dSv8MJYEvVqiVrpflIde8io0gpLL3q1rUEARaQKBgQDZgX2YlejYqpzDMpjJVclERhhuM4J+xxjmdxCD8pnyknBBMVTv8h+aV0S/tnbVBz6uhOUALjtdHYeEfeOrEHIp+4xtd2aJAKciPMWD8ArSOu0cJ38h5M7/ZXRm1gLMLKxDzmBDKpHobJM7r99QeNNuBSeqjMvA24QKtEPwNwW7+wKBgFoPNfunXOIOgV+kn5ibFOwWIBAvz95RdpCo+RY/iAVapC1miujR5MrH3nmCOagG7rOKm6yN3iJvbhB+L99UN3ze00VyQjDm88t6jRcjg2LNDVIj+HZ6xamlnW74ckjysTEQDWklhwI19BJcjI7ys3lZF5b4NlbLtTL7jQPSLzL5AoGAJT5tGTGiO2eLjEkfrGoKGqy+BjC/yaGh++SraUyjW8wDeMZPuv6EttL2rLU7x+KDszKCW/OOqrUhvWgpEeOxCMtQEnZ9kjwQYmZxk9QIplL8wvNoa49YepcOxYUj2X5UyQ+PoDCr51agJ3pIDOmDmrU7Q5L0WMO96m9PqtRhIP0CgYEAvGI4d3JjykwBFUsQfeyrUOjkCJ705vdojcQeFcT/G98M1cQTSFyXk260cvKpm1Y9rdmpW0WpOh9olymHOekxvpbYhCeYiLCLKxSR4O6t3fM9W4tKW7znIol5O1HcynRdN3YMGEyu1eDF4QnG0/DB6M6iljriadZ3uPcvQLVgRLU=",
+    "update_url": "https://raw.githubusercontent.com/enharukalo/twitchcekilisleri/master/src/updates.xml",
+    "web_accessible_resources": [
+        "main.html",
+        "send-message.js"
+    ]
+}

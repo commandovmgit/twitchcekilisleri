@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Seçenekler - Twitch Çekilişleri</title>
+		<style>
+			* { box-sizing: border-box; }
+			html, body { margin: 0; padding: 0; }
+			body { padding: 0 1em 1em; }
+			textarea { width: 100%; font-family: monospace; font-size: 1.5em }
+			.saved {
+				position: fixed;
+				top: 0;
+				right: 0;
+				padding: .4em .8em;
+				margin: .5em;
+				color: #fff;
+				background: #468B46;
+				border-radius: 2px;
+			}
+		</style>
+	</head>
+	<body>
+		<h2>Kanala hızlı erişim butonu</h2>
+		<p>Her satır yeni bir kısayol oluşturur.</p>
+		<textarea id="quick-access-channels" rows="5"></textarea>
+		<p>
+			Kısayollar tarayıcının sağ üstündeki eklentiler kısmında gözükür.
+			<br>
+			Eğer bir kanal kısayolu varsa eklentiye tıkladığında o kanal direkt açılacaktır.
+			<br>
+			Kanal isimlerini Twitch kanallarının URL'lerinden alabilirsin. Örneğin:
+			<br>
+			<code>https://www.twitch.tv/<strong>kanal_ismi</strong></code>
+		</p>
+
+		<div id="saved" class="saved">Kaydedildi</div>
+
+		<script src="options.js"></script>
+	</body>
+</html>
