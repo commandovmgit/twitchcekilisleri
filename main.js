@@ -1371,7 +1371,7 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
     if(i === null){
         return;
     }
-    r.src = "https://www.twitch.tv/embed/" + i + "/chat?darkpopout" + "&parent=" + "localhost", document.querySelector("title").textContent = "Çekiliş: " + i, setTimeout(function () {
+    r.src = "https://www.twitch.tv/embed/" + i + "/chat?darkpopout" + "&parent=" + "localhost", document.querySelector("title").textContent = chrome.i18n.getMessage("TAB_GIVEAWAY_TITLE") + " " + i, setTimeout(function () {
         var e = r.style.position;
         r.style.position = "static", setTimeout(function () {
             r.style.position = e
@@ -1435,7 +1435,7 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
             } else if ("falsy" === x.searchFilter.value) {
                 if (e[x.searchFilter.prop]) return !1
             } else if (x.searchFilter.value !== e[x.searchFilter.prop]) return !1;
-            return !(x.searchQuery && !~e.name.indexOf(x.searchQuery) && !~e.displayName.indexOf(x.searchQuery)) && ("herkes" === t.type || !("aktif" === t.type && x.activeCutoffTime > e.lastMessage) && ("kelime" !== t.type || !t.keyword || t.keyword === e.keyword))
+            return !(x.searchQuery && !~e.name.indexOf(x.searchQuery) && !~e.displayName.indexOf(x.searchQuery)) && ("all" === t.type || !("aktif" === t.type && x.activeCutoffTime > e.lastMessage) && ("kelime" !== t.type || !t.keyword || t.keyword === e.keyword))
         }
 
         function s() {
@@ -1455,8 +1455,8 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
         window.app = this, this.twitch = p, this.channel = g, this.chat = f, this.container = e, this.setter = d(this), this.config = m(!0, v.config, t);
         var q = localStorage[this.config.storageName] ? JSON.parse(localStorage[this.config.storageName]) : {};
         this.options = m(!0, {}, v.options, q), this.version = require("tgr/data/changelog.json")[0].version, this.isNewVersion = this.options.lastReadChangelog !== this.version, this.users = new b, this.selectedUsers = new b, this.winners = new k(g.name, {onsync: r.redraw}), this.rolling = {
-            type: "herkes",
-            types: ["herkes", "aktif", "kelime"],
+            type: "all",
+            types: ["all", "aktif", "kelime"],
             activeTimeout: 12e5,
             keyword: null,
             caseSensitive: !1,
@@ -1464,7 +1464,7 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
             minBits: 0,
             subscribedTime: 0,
             forbiddenWords: [],
-            groups: {broadcaster: !0, staff: !0, admin: !0, mod: !0, vip: !0, user: !0}
+            groups: {broadcaster: !0, staff: !0, mod: !0, subscriber: !0, vip: !0, user: !0}
         }, this.winner = null, this.messages = new u, this.winners.connect(), this.setter.on("options", function (e) {
             localStorage[x.config.storageName] = JSON.stringify(e)
         }), this.updateSelectedUsers = function () {
@@ -1506,7 +1506,7 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
         }), this.setter.on("search", x.requestUpdateSelectedUsers), this.setter.on("options.forbiddenWords", s), s(), this.roll = function () {
             document.activeElement && document.activeElement.blur && document.activeElement.blur(), x.messages.clear();
             for (var e, t, n = [], i = x.rolling.subscriberLuck, r = 0; t = x.selectedUsers[r], r < x.selectedUsers.length; r++) if (t.eligible) if (t.subscriber && i > 1) for (e = 0; e < i; e++) n.push(t); else n.push(t);
-            if (!n.length) return void x.messages.danger("There is none to roll from.");
+            if (!n.length) return void x.messages.danger(chrome.i18n.getMessage("NONE_TO_ROLL_FROM"));
             x.winner && (delete x.winner.rolledAt, delete x.winner.respondedAt, delete x.winner.messages);
             var s = n[Math.random() * n.length | 0];
             s.messages = [], s.rolledAt = new Date, x.options.uncheckWinners && (s.eligible = !1), x.options.announceWinner && f.post(String(x.options.announceTemplate).replace("{name}", s.name)), x.setter("winner")(s), x.section.activate("profile", s), g.channel().then(null, function (e) {
@@ -1529,32 +1529,32 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
         return [r(".viewers", [r(".bar", [r(".search", [r("input[type=text]", {
             oninput: r.withAttr("value", e.setter("search")),
             onkeydown: l(27, e.setter("search").to("")),
-            placeholder: "ara...",
+            placeholder: chrome.i18n.getMessage("SEARCH_TITLE"),
             required: !0,
             value: e.search
         }), e.search ? r(".cancel", {
             onclick: e.setter("search").to(""),
-            "data-tip": "Aramayı iptal et <kbd>ESC</kbd>"
+            "data-tip": chrome.i18n.getMessage("CANCEL_SEARCH")
         }, s("close", "-small")) : null]), r("h3.count", e.selectedUsers.length)]), e.components.render("userlist")]), r(".primary", [r(".bar", {key: "bar"}, [r("div", {
             class: e.classWhenActive("index", "button index", "active"),
             onmousedown: e.toSection("index"),
-            "data-tip": "Çekiliş"
+            "data-tip": chrome.i18n.getMessage("GIVEAWAY_TITLE")
         }, [s("gift")]), e.winner ? r("div", {
             class: e.classWhenActive("profile", "button profile", "active"),
             onmousedown: e.toSection("profile", e.winner),
-            "data-tip": "Kazanan"
+            "data-tip": chrome.i18n.getMessage("WINNER_TITLE")
         }, [s("trophy"), r("span.label", e.winner.name)]) : null, r(".spacer"), r("div", {
             class: e.classWhenActive("winners", "button winners", "active"),
             onmousedown: e.toSection("winners"),
-            "data-tip": "Geçmiş kazananlar"
+            "data-tip": chrome.i18n.getMessage("RECENT_WINNERS_TITLE")
         }, [s("trophy-list")]), r("div", {
             class: e.classWhenActive("bitcoin", "button config", "active"),
             onmousedown: e.toSection("bitcoin"),
-            "data-tip": "Bağış"
+            "data-tip": chrome.i18n.getMessage("DONATE_TITLE")
         }, [s("bitcoin")]), r("div", {
             class: e.classWhenActive("config", "button config", "active"),
             onmousedown: e.toSection("config"),
-            "data-tip": "Ayarlar"
+            "data-tip": chrome.i18n.getMessage("SETTINGS_TITLE")
         }, [s("cogwheel")])]), e.messages.render(), r("section.section." + e.section.active, {key: e.section.key}, e.section.render())])]
     }
 /* 
@@ -2158,7 +2158,7 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
     }
 }), require.register("tgr/src/js/model/user.js", function (e, t) {
     function n(e) {
-        i.call(this), this.group = "user", this.eligible = !0, this.badges = [], this.broadcaster = !1, this.staff = !1, this.admin = !1, this.subscriber = !1, this.mod = !1, this.vip = !1, this.turbo = !1, this.bits = 0, this.subscribedTime = 0, this.extend(e), this.id = this.name, this.channelURL = s + "/" + this.id, this.profileURL = this.channelURL + "/profile", this.messageURL = s + "/message/compose?to=" + this.id, this.lastMessage = new Date
+        i.call(this), this.group = "user", this.eligible = !0, this.badges = [], this.broadcaster = !1, this.staff = !1, this.admin = !1, this.sub = this.subscriber, this.subscriber = !1, this.mod = !1, this.vip = !1, this.turbo = !1, this.bits = 0, this.subscribedTime = 0, this.extend(e), this.id = this.name, this.channelURL = s + "/" + this.id, this.profileURL = this.channelURL, this.messageURL = s + "/message/compose?to=" + this.id, this.lastMessage = new Date
     }
 
     var i = require("tgr/src/js/model/model.js"), r = require("component~inherit@0.0.3"),
@@ -2183,6 +2183,7 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
         admin: {order: 3, icon: "shield-full"},
         mod: {order: 4, icon: "sword"},
         vip: {order: 5, icon: "vip"},
+        subscriber: {order: 6, icon: null},
         user: {order: 6, icon: null}
     }, n.badges = Object.keys(n.groups).concat("subscriber")
 }), require.register("tgr/src/js/model/users.js", function (e, t) {
@@ -2332,7 +2333,7 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
       return [
         i("figure.bitcoin", [
           i(".qr", { config: r("slideinleft", 50 * e++) }),
-          i("figcaption.text", { config: r("slideinleft", 50 * e++) }, "Bir bağış yap:"),
+          i("figcaption.text", { config: r("slideinleft", 50 * e++) }, chrome.i18n.getMessage("MAKE_A_DONATION")),
           i(
             "figcaption.address",
             { config: r("slideinleft", 50 * e++) },
@@ -2392,25 +2393,25 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
         return [s("article.option.uncheck-winners", {
             key: "option-uncheck-winners",
             config: a("slideinleft", 50 * t++)
-        }, [s("label", {onmousedown: l(1, e.setter("options.uncheckWinners").to(!e.options.uncheckWinners))}, "Kazananı çıkar"), o(e.options.uncheckWinners ? "check" : "close", {
+        }, [s("label", {onmousedown: l(1, e.setter("options.uncheckWinners").to(!e.options.uncheckWinners))}, chrome.i18n.getMessage("UNCHECK_WINNER")), o(e.options.uncheckWinners ? "check" : "close", {
             class: "checkbox" + (e.options.uncheckWinners ? " checked" : ""),
             onmousedown: l(1, e.setter("options.uncheckWinners").to(!e.options.uncheckWinners))
-        }), s("p.description", "İşaretlendiğinde, kazananlar otomatik olarak katılım listesinden çıkarılır ki iki defa kazanmasın.")]), s("article.option.announce-winner", {
+        }), s("p.description", chrome.i18n.getMessage("CONFIG_UNCHECK_WINNERS"))]), s("article.option.announce-winner", {
             key: "option-announce-winner",
             config: a("slideinleft", 50 * t++)
-        }, [s("label", {onmousedown: l(1, e.setter("options.announceWinner").to(!e.options.announceWinner))}, "Kazananı duyur"), o(e.options.announceWinner ? "check" : "close", {
+        }, [s("label", {onmousedown: l(1, e.setter("options.announceWinner").to(!e.options.announceWinner))}, chrome.i18n.getMessage("ANNOUNCE_WINNER")), o(e.options.announceWinner ? "check" : "close", {
             class: "checkbox" + (e.options.announceWinner ? " checked" : ""),
             onmousedown: l(1, e.setter("options.announceWinner").to(!e.options.announceWinner))
-        }), s("p.description", ["Kazananı kanaldaki sohbetten duyurur."])]), s("article.option.announce-template", {
+        }), s("p.description", [chrome.i18n.getMessage("CONFIG_ANNOUNCE_WINNER_DESC")])]), s("article.option.announce-template", {
             key: "option-announce-template",
             config: a("slideinleft", 50 * t++)
-        }, [s("label[for=option-announce-template]", ["Duyuru mesajı", s("p.description", [s("code", "{name}"), " - kazananın ismi"])]), s("textarea#option-announce-template", {
+        }, [s("label[for=option-announce-template]", [chrome.i18n.getMessage("CONFIG_ANNOUNCE_TEMPLATE"), s("p.description", [s("code", "{name}"), " -", chrome.i18n.getMessage("CONFIG_ANNOUNCE_TEMPLATE_CODE")])]), s("textarea#option-announce-template", {
             oninput: s.withAttr("value", e.setter("options.announceTemplate")),
             value: e.options.announceTemplate
         })]), s("article.option.keyword-antispam", {
             key: "option-keyword-antispam",
             config: a("slideinleft", 50 * t++)
-        }, [s("label", {onmousedown: l(1, e.setter("options.keywordAntispam").to(!e.options.keywordAntispam))}, "Spam yapanları çıkar"), o(e.options.keywordAntispam ? "check" : "close", {
+        }, [s("label", {onmousedown: l(1, e.setter("options.keywordAntispam").to(!e.options.keywordAntispam))}, chrome.i18n.getMessage("KEYWORD_ANTISPAM_TITLE")), o(e.options.keywordAntispam ? "check" : "close", {
             class: "checkbox" + (e.options.keywordAntispam ? " checked" : ""),
             onmousedown: l(1, e.setter("options.keywordAntispam").to(!e.options.keywordAntispam))
         }), e.options.keywordAntispam ? s("input[type=range]", {
@@ -2418,20 +2419,20 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
             max: 5,
             oninput: s.withAttr("value", e.setter("options.keywordAntispamLimit").type("number")),
             value: e.options.keywordAntispamLimit
-        }) : null, e.options.keywordAntispam ? s("span.meta", e.options.keywordAntispamLimit) : null, s("p.description", "Anahtar kelimeyi birden fazla yazanlar otomatik olarak listeden çıkarılır.")]), s("article.option.ignore-list", {
+        }) : null, e.options.keywordAntispam ? s("span.meta", e.options.keywordAntispamLimit) : null, s("p.description", chrome.i18n.getMessage("KEYWORD_ANTISPAM_DESC"))]), s("article.option.ignore-list", {
             key: "option-ignore-list",
             config: a("slideinleft", 50 * t++)
-        }, [s("label[for=option-ignore-list]", ["Yasaklı listesi", s("p.description", "Yeni kullanıcılar için boşluk bırak.")]), s("textarea#option-ignore-list", {
-            placeholder: "isimleri buraya yaz",
+        }, [s("label[for=option-ignore-list]", [chrome.i18n.getMessage("BANNED_USERS"), s("p.description", chrome.i18n.getMessage("BANNED_USERS_DESC"))]), s("textarea#option-ignore-list", {
+            placeholder: chrome.i18n.getMessage("BANNED_USERS_PLACEHOLDER"),
             oninput: s.withAttr("value", e.updateIgnoreList),
             value: e.options.ignoreList.join("\n")
         })]), s("article.option.display-tooltips", {
             key: "option-display-tooltips",
             config: a("slideinleft", 50 * t++)
-        }, [s("label", {onmousedown: l(1, e.setter("options.displayTooltips").to(!e.options.displayTooltips))}, "İpuçlarını göster"), o(e.options.displayTooltips ? "check" : "close", {
+        }, [s("label", {onmousedown: l(1, e.setter("options.displayTooltips").to(!e.options.displayTooltips))}, chrome.i18n.getMessage("DISPLAY_TOOLTIPS")), o(e.options.displayTooltips ? "check" : "close", {
             class: "checkbox" + (e.options.displayTooltips ? " checked" : ""),
             onmousedown: l(1, e.setter("options.displayTooltips").to(!e.options.displayTooltips))
-        }), s("p.description", "Eğer neyin ne yaptığını biliyorsan ipuçlarını kapat.")])]
+        }), s("p.description", chrome.i18n.getMessage("DISPLAY_TOOLTIPS_DESC"))])]
     }
 
     var s = require("lhorie~mithril@v0.1.34"), o = require("tgr/src/js/component/icon.js"),
@@ -2461,10 +2462,10 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
 
     function i(e) {
         var t = 0;
-        return [l(".controls", [l(".block.groups", Object.keys(e.rolling.groups).map(o, e)), l("ul.block.rolltypes", {config: d("slideinleft", 50 * t++)}, e.rolling.types.map(a, e)), l(".block.options", [m[e.rolling.type].view(e), l(".option", {
+            return [l(".controls", [l(".block.groups", Object.keys(e.rolling.groups).map(o, e)), l("ul.block.rolltypes", {config: d("slideinleft", 50 * t++)}, e.rolling.types.map(a, e)), l(".block.options", [m[e.rolling.type].view(e), l(".option", {
             key: "min-bits",
             config: d("slideinleft", 50 * t++)
-        }, [l("label[for=min-bits]", "En düşük bit"), l("input[type=range]#min-bits", {
+        }, [l("label[for=min-bits]", chrome.i18n.getMessage("MIN_BITS_TITLE")), l("input[type=range]#min-bits", {
             min: 0,
             max: f.cheerSteps.length - 1,
             step: 1,
@@ -2473,49 +2474,49 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
         }), l("span.meta", e.rolling.minBits.toLocaleString())]), l(".option", {
             key: "subscribed-time",
             config: d("slideinleft", 50 * t++)
-        }, [l("label[for=subscribed-time]", "Abonelik süresi"), l("input[type=range]#subscribed-time", {
+        }, [l("label[for=subscribed-time]", chrome.i18n.getMessage("SUBS_TIME_TITLE")), l("input[type=range]#subscribed-time", {
             min: 0,
             max: e.config.subscribedTimeSteps.length - 1,
             oninput: l.withAttr("value", e.setSubscribedTime),
             value: e.config.subscribedTimeSteps.indexOf(e.rolling.subscribedTime)
-        }), l("span.meta", [e.rolling.subscribedTime, " ", c("moon")]), l("p.description", ["Sadece aboneler katılsın istiyorsan arama kısmına ", [l("strong", "*")], " yazabilirsin."])]), l(".option", {
+        }), l("span.meta", [e.rolling.subscribedTime, " ", c("moon")]), l("p.description", [chrome.i18n.getMessage("SUBSCRIBED_TIME_DESC")])]), l(".option", {
             key: "subscriber-luck",
             config: d("slideinleft", 50 * t++),
             className: e.rolling.subscribedTime > 0 ? "disabled" : ""
-        }, [l("label[for=subscriber-luck]", "Abone şansı"), l("input[type=range]#subscriber-luck", {
+        }, [l("label[for=subscriber-luck]", chrome.i18n.getMessage("SUBS_LUCK_TITLE")), l("input[type=range]#subscriber-luck", {
             min: 1,
             max: e.config.maxSubscriberLuck,
             oninput: l.withAttr("value", e.setter("rolling.subscriberLuck").type("number")),
             value: e.rolling.subscriberLuck,
             disabled: e.rolling.subscribedTime > 0
-        }), l("span.meta", [e.rolling.subscriberLuck, l("em", "×")]), l("p.description", ["Aboneler", e.rolling.subscriberLuck > 1 ? [" ", l("strong", e.rolling.subscriberLuck), " kere katılıyor"] : ["in ekstra şansı yok"], "."])]), l(".option", {
+        }), l("span.meta", [e.rolling.subscriberLuck, l("em", "×")]), l("p.description", [chrome.i18n.getMessage("SUBSCRIBER_LUCK_DESC_1"), e.rolling.subscriberLuck > 1 ? [" ", l("strong", e.rolling.subscriberLuck), " ", chrome.i18n.getMessage("SUBSCRIBER_LUCK_DESC_2")] : [chrome.i18n.getMessage("SUBSCRIBER_LUCK_DESC_3")], "."])]), l(".option", {
             key: "uncheck-winners",
             config: d("slideinleft", 50 * t++)
-        }, [l("label", {onmousedown: h(1, e.setter("options.uncheckWinners").to(!e.options.uncheckWinners))}, "Kazananı çıkar"), c(e.options.uncheckWinners ? "check" : "close", {
+        }, [l("label", {onmousedown: h(1, e.setter("options.uncheckWinners").to(!e.options.uncheckWinners))}, chrome.i18n.getMessage("UNCHECK_WINNER")), c(e.options.uncheckWinners ? "check" : "close", {
             class: "checkbox" + (e.options.uncheckWinners ? " checked" : ""),
             onmousedown: h(1, e.setter("options.uncheckWinners").to(!e.options.uncheckWinners))
-        }), l("p.description.sameline", "…ki aynı çekilişi iki defa kazanmasın.")]), l(".option", {
+        }), l("p.description.sameline", chrome.i18n.getMessage("UNCHECK_WINNER_DESC"))]), l(".option", {
             key: "announce-winner",
             config: d("slideinleft", 50 * t++)
-        }, [l("label", {onmousedown: h(1, e.setter("options.announceWinner").to(!e.options.announceWinner))}, "Kazananı duyur"), c(e.options.announceWinner ? "check" : "close", {
+        }, [l("label", {onmousedown: h(1, e.setter("options.announceWinner").to(!e.options.announceWinner))}, chrome.i18n.getMessage("ANNOUNCE_WINNER")), c(e.options.announceWinner ? "check" : "close", {
             class: "checkbox" + (e.options.announceWinner ? " checked" : ""),
             onmousedown: h(1, e.setter("options.announceWinner").to(!e.options.announceWinner))
-        }), l("p.description.sameline", ["Duyuruyu ", l('a[href="#"]', {onmousedown: e.toSection("config")}, "ayarlar"), "dan değiştirebilirsin."])]), l(".option", {
+        }), l("p.description.sameline", chrome.i18n.getMessage("ANNOUNCE_WINNER_DESC"), [l('a[href="#"', {onmousedown: e.toSection("config")}, " ", chrome.i18n.getMessage("SETTINGS"))])]), l(".option", {
             key: "forbiddenWords",
             config: d("slideinleft", 50 * t++)
-        }, [l("label[for=forbiddenWords]", "Yasaklı kelimeler"), l("input[type=text]#forbiddenWords", {
+        }, [l("label[for=forbiddenWords]", chrome.i18n.getMessage("FORBIDDEN_WORDS")), l("input[type=text]#forbiddenWords", {
             value: e.options.forbiddenWords,
-            placeholder: "bunun,gibi,yasaklı,kelimeler",
+            placeholder: chrome.i18n.getMessage("FORBIDDEN_WORDS_PLACEHOLDER"),
             oninput: l.withAttr("value", e.setter("options.forbiddenWords")),
             onkeydown: h(27, e.setter("options.forbiddenWords").to(""))
-        }), l("p.description.sameline", ["Bu kelimeleri kullananlar katılamasın."])])]), l(".block.actions", [l(".btn.btn-info.reset", {
+        }), l("p.description.sameline", [chrome.i18n.getMessage("FORBIDDEN_WORDS_DESC")])])]), l(".block.actions", [l(".btn.btn-info.reset", {
             config: d("slideinleft", 50 * t++),
             onmousedown: h(1, e.resetEligible),
-            "data-tip": "Katılımları yenile<br><small>Tiklenmemiş olanları yeniden tikler.</small>"
+            "data-tip": chrome.i18n.getMessage("RESET_TIP")
         }, [l("i.eligible-icon")]), l(".btn.btn-success.roll", {
             config: d("slideinleft", 50 * t++),
             onmousedown: h(1, e.roll)
-        }, "Çek")])])]
+        }, chrome.i18n.getMessage("ROLL_TITLE"))])])]
     }
 
     function r(e, t) {
@@ -2524,7 +2525,7 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
 
     function s(e) {
         var t = Math.floor(e / 1e3), n = Math.floor(t / 3600), i = Math.floor((t - 3600 * n) / 60);
-        return n > 0 ? [n, l("small", "h"), " ", i, l("small", "m")] : [i, l("small", "m")]
+        return n > 0 ? [n, l("small", chrome.i18n.getMessage("HOURS_SHORT")), " ", i, l("small", chrome.i18n.getMessage("MINUTES_SHORT"))] : [i, l("small", chrome.i18n.getMessage("MINUTES_SHORT"))]
     }
 
     function o(e, t) {
@@ -2540,7 +2541,7 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
             class: this.rolling.type === e ? "active" : "",
             onclick: this.setter("rolling.type").to(e),
             "data-tip": m[e].tip(this)
-        }, u(e))
+        }, m[e].name)
     }
 
     var l = require("lhorie~mithril@v0.1.34"), c = require("tgr/src/js/component/icon.js"),
@@ -2549,55 +2550,55 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
         f = require("tgr/data/config.json");
     t.exports = {name: "index", controller: n, view: i};
     var m = {};
-    m.herkes = {
-        name: "herkes", tip: function () {
-            return "Herkes katılsın<br><small>Bu pencereyi açtığından beri sohbette herhangi bir şey yazanlar arasından çekiliş yap.</small>"
+    m.all = {
+        name: chrome.i18n.getMessage("ALL_TITLE"), tip: function () {
+            return chrome.i18n.getMessage("ALL_TIP")
         }, view: function () {
             return null
         }
     }, m.aktif = {
-        name: "aktif", tip: function (e) {
-            return "Aktif izleyicilerden çek<br><small>Yakın zamanda sohbet edenlerden çekiliş yap.</small>"
+        name: chrome.i18n.getMessage("ACTIVE_TITLE"), tip: function (e) {
+            return chrome.i18n.getMessage("ACTIVE_TIP")
         }, view: function (e) {
             return l(".option", {
                 key: "active-timeout",
                 config: d("slideinleft", 0)
-            }, [l("label[for=active-timeout]", "Zaman aşımı"), l("input[type=range]#active-timeout", {
+            }, [l("label[for=active-timeout]", {"data-tip": [chrome.i18n.getMessage("ACTIVE_TIMEOUT_TIP")]}, chrome.i18n.getMessage("ACTIVE_TIMEOUT")), l("input[type=range]#active-timeout", {
                 min: 6e4,
                 max: e.config.maxActiveTimeout,
                 step: 6e4,
                 oninput: l.withAttr("value", e.setter("rolling.activeTimeout").type("number")),
-                value: e.rolling.activeTimeout
-            }), l("span.meta", s(e.rolling.activeTimeout)), l("p.description", ["Son ", s(e.rolling.activeTimeout), "'da yazanlar arasından çek."])])
+                value: e.rolling.activeTimeout,
+            }), l("span.meta", s(e.rolling.activeTimeout))])
         }
     }, m.kelime = {
-        name: "kelime", tip: function () {
-            return "Anahtar kelime üzerinden çekiliş<br><small>Belirlediğin anahtar kelime ile çekilişe katılım sağla.</small>"
+        name: chrome.i18n.getMessage("KEYWORD_TITLE"), tip: function () {
+            return chrome.i18n.getMessage("KEYWORD_TIP")
         }, view: function (e) {
             return [l(".keyword" + (e.rolling.keyword ? ".active" : ""), {
                 key: "keyword",
                 config: d("slideinleft", 0)
             }, [l("input[type=text].word", {
                 value: e.rolling.keyword,
-                placeholder: "Anahtar kelimeyi yaz ...",
+                placeholder: chrome.i18n.getMessage("KEYWORD_PLACEHOLDER"),
                 oninput: l.withAttr("value", e.setter("rolling.keyword")),
                 onkeydown: h(27, e.cancelKeyword)
             }), l(".btn.clean", {
                 onmousedown: h(1, e.cleanEntries),
-                "data-tip": "Bütün katılımları sil<br><small>İzleyicilerin anahtar kelimeyi tekrar yazmalarını sağla.</small>"
+                "data-tip": chrome.i18n.getMessage("CLEAN_TIP")
             }, [c("trash")]), l(".btn.cancel", {
                 onmousedown: h(1, e.cancelKeyword),
-                "data-tip": "Kelimeyi iptal et <kbd>ESC</kbd>"
+                "data-tip": chrome.i18n.getMessage("CANCEL_TIP")
             }, [c("close")])]), l(".option.case-sensitive", {
                 key: "case-sensitive",
                 config: d("slideinleft", 100)
-            }, [l("label", {onmousedown: h(1, e.setter("rolling.caseSensitive").to(!e.rolling.caseSensitive))}, "Harf duyarı"), c(e.rolling.caseSensitive ? "check" : "close", {
+            }, [l("label", {onmousedown: h(1, e.setter("rolling.caseSensitive").to(!e.rolling.caseSensitive))}, chrome.i18n.getMessage("KEYWORD_CASE_SENSITIVE_TITLE")), c(e.rolling.caseSensitive ? "check" : "close", {
                 class: "checkbox" + (e.rolling.caseSensitive ? " checked" : ""),
                 onmousedown: h(1, e.setter("rolling.caseSensitive").to(!e.rolling.caseSensitive))
-            }), l("p.description.sameline", ["Büyük/küçük harf ", e.rolling.caseSensitive ? l("strong", "duyarlı!") : l("strong", "fark ettirmiyor!")])]), l(".option.keyword-antispam", {
+            }), l("p.description.sameline", [chrome.i18n.getMessage("KEYWORD_CASE_SENSITIVE_DESC_1"), " ", e.rolling.caseSensitive ? l("strong", chrome.i18n.getMessage("KEYWORD_CASE_SENSITIVE_DESC_2")) : l("strong", chrome.i18n.getMessage("KEYWORD_CASE_SENSITIVE_DESC_3"))])]), l(".option.keyword-antispam", {
                 key: "option-keyword-antispam",
                 config: d("slideinleft", 150)
-            }, [l("label", {onmousedown: h(1, e.setter("options.keywordAntispam").to(!e.options.keywordAntispam))}, "Spam yapanları çıkar"), c(e.options.keywordAntispam ? "check" : "close", {
+            }, [l("label", {onmousedown: h(1, e.setter("options.keywordAntispam").to(!e.options.keywordAntispam))}, chrome.i18n.getMessage("KEYWORD_ANTISPAM_TITLE")), c(e.options.keywordAntispam ? "check" : "close", {
                 class: "checkbox" + (e.options.keywordAntispam ? " checked" : ""),
                 onmousedown: h(1, e.setter("options.keywordAntispam").to(!e.options.keywordAntispam))
             }), e.options.keywordAntispam ? l("input[type=range]", {
@@ -2605,7 +2606,7 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
                 max: 5,
                 oninput: l.withAttr("value", e.setter("options.keywordAntispamLimit").type("number")),
                 value: e.options.keywordAntispamLimit
-            }) : null, e.options.keywordAntispam ? l("span.meta", e.options.keywordAntispamLimit) : null, l("p.description", "Anahtar kelimeyi birden fazla yazanları çekilişten çıkarır.")])]
+            }) : null, e.options.keywordAntispam ? l("span.meta", e.options.keywordAntispamLimit) : null, l("p.description", chrome.i18n.getMessage("KEYWORD_ANTISPAM_DESC"))])]
         }
     }
 }), require.register("tgr/src/js/section/profile.js", function (e, t) {
@@ -2666,16 +2667,16 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
         }, [n.avatar ? s("img", {src: n.avatar}) : a("user")])]), s("aside.middle", [s(".meta", {
             class: "color-" + (i ? "success" : i === !1 ? "light" : "warning"),
             config: c("slideinright", 200),
-            "data-tip": null == i ? "Bir sıkıntı var<br><small>Twitch çökmüş olabilir.</small>" : ""
-        }, ["Takip ediyor", a(i ? "check" : i === !1 ? "close" : "help", "status")]), s(".meta", {
+            "data-tip": null == i ? chrome.i18n.getMessage("API_WARNING_DESC") : ""
+        }, [chrome.i18n.getMessage("API_FOLLOWING"), a(i ? "check" : i === !1 ? "close" : "help", "status")]), s(".meta", {
             class: "color-" + (o ? "success" : "light"),
             config: c("slideinleft", 200)
-        }, [a(o ? "check" : "close", "status"), "Abone"])]), s("aside.lower", [s(".action.sliding", {
+        }, [a(o ? "check" : "close", "status"), chrome.i18n.getMessage("API_SUBSCRIBED")])]), s("aside.lower", [s(".action.sliding", {
             onmousedown: u(1, e.roll),
             config: c("slideinright", 300)
-        }, [s("span.name", "Tekrar çek"), a("reload")]), s("", {
+        }, [s("span.name", chrome.i18n.getMessage("GIVEAWAY_REROLL")), a("reload")]), s("", {
             config: c("slideinleft", 300)
-        }, [a(""), s("span.name", "")])])])]), s(".messages", [s("h2.title", {config: c("slideinleft", 50 * t++ + 200)}, [s("span.name", {"data-tip": "Kazandıktan sonraki mesajlar"}, [a("speech-bubble"), " Mesajlar ", s("span.count", n.messages.length)]), s("span.clock" + (n.respondedAt ? ".paused" : ""), {"data-tip": "Cevap verme zamanı<br><small>Kazandıktan sonra yazdığı ilk mesaj arasında geçen zaman.</small>"}, [s("span.minutes", h.minutes), s("span.colon", ":"), s("span.seconds", String("00" + h.seconds).substr(-2))])]), s("ul.list.fadein", {config: e.messagesScrolling}, n.messages.slice(-100).map(r, e))])]
+        }, [a(""), s("span.name", "")])])])]), s(".messages", [s("h2.title", {config: c("slideinleft", 50 * t++ + 200)}, [s("span.name", {"data-tip": chrome.i18n.getMessage("WINNER_MESSAGES_TIP")}, [a("speech-bubble"), " ", chrome.i18n.getMessage("WINNER_MESSAGES_TITLE"), " ", s("span.count", n.messages.length)]), s("span.clock" + (n.respondedAt ? ".paused" : ""), {"data-tip": chrome.i18n.getMessage("WINNER_ANSWER_TIME_TIP")}, [s("span.minutes", h.minutes), s("span.colon", ":"), s("span.seconds", String("00" + h.seconds).substr(-2))])]), s("ul.list.fadein", {config: e.messagesScrolling}, n.messages.slice(-100).map(r, e))])]
     }
 
     function r(e) {
@@ -2710,7 +2711,7 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
         }
 
         function i() {
-            var t = window.confirm("Seçilmiş " + e.winners.selected.length + " kaydı sil?");
+            var t = window.confirm(chrome.i18n.getMessage("DELETE_SELECTED_RECORDS", e.winners.selected.length));
             t && e.winners.clearSelected()
         }
 
@@ -2723,7 +2724,7 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
             }, [l("header", [l(".name", {href: "https://www.twitch.tv/" + r.name}, s), l("a.profile", {
                 href: "https://www.twitch.tv/" + r.name,
                 target: "_blank",
-                title: "Profil"
+                title: chrome.i18n.getMessage("PROFILE")
             }, c("user")), l(".time", {title: new Date(r.time).toLocaleString()}, g(r.time))]), l(".title", w ? l.trust(r.title.replace(w, '<span class="query">$1</span>')) : r.title), l("button.delete", {onclick: n(r.id)}, [c("trash")])])
         }
 /*
@@ -2736,14 +2737,14 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
 
 
         function f() {
-            return l(".empty", {key: "empty-list-placeholder"}, [l("h2", "Geçmiş kazananlar"), l("p", "Geçmişte çekiliş kazananların listesi burada bulunur."), l("p", "Şimdilik boş. :)")])
+            return l(".empty", {key: "empty-list-placeholder"}, [l("h2", chrome.i18n.getMessage("EMPTY_LIST_PLACEHOLDER_H1")), l("p", chrome.i18n.getMessage("EMPTY_LIST_PLACEHOLDER_H2")), l("p", chrome.i18n.getMessage("EMPTY_LIST_PLACEHOLDER_H3"))])
         }
 
         var g = o(), m = h(), v = Object.keys(e.winners.channels);
         v.indexOf(e.winners.channel) === -1 && v.push(e.winners.channel), v = v.sort();
         var w = !!e.winners.searchTerm && new RegExp("(" + p(e.winners.searchTerm) + ")", "i"), b = 0;
         return [l(".controls", {config: d("fadein")}, [l("input[type=search].term", {
-            placeholder: "ara...",
+            placeholder: chrome.i18n.getMessage("SEARCH_TITLE"),
             value: e.winners.searchTerm,
             oninput: l.withAttr("value", e.winners.search),
             onkeydown: u(27, e.winners.search.bind(null, "")),
@@ -2751,15 +2752,15 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
         }), l("select.channel", {onchange: l.withAttr("value", e.winners.switchChannel)}, v.map(function (t) {
             var n = e.winners.channels[t] ? e.winners.channels[t].length : 0, i = t + " (" + n + ")";
             return l("option", {value: t, selected: t === e.winners.selectedChannel}, i)
-        })), l(".time", [l(".from", [l("span", "İlk:"), l("input[type=search].date", {
+        })), l(".time", [l(".from", [l("span", chrome.i18n.getMessage("FROM_TITLE")), l("input[type=search].date", {
             oninput: l.withAttr("value", e.winners.from),
             config: m,
-            placeholder: "tarih",
+            placeholder: chrome.i18n.getMessage("DATE_TITLE"),
             value: e.winners.fromTime ? new Date(e.winners.fromTime).toLocaleDateString() : null
-        })]), l(".to", [l("span", "Son:"), l("input[type=search].date", {
+        })]), l(".to", [l("span", chrome.i18n.getMessage("TO_TITLE")), l("input[type=search].date", {
             oninput: l.withAttr("value", e.winners.to),
             config: m,
-            placeholder: "tarih",
+            placeholder: chrome.i18n.getMessage("DATE_TITLE"),
             value: e.winners.toTime ? new Date(e.winners.toTime).toLocaleDateString() : null
         })])])]), e.virtualList({
             props: {class: "winners"},
@@ -2767,10 +2768,10 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
             itemsCount: e.winners.selected.length,
             renderItem: a,
             renderEmpty: f
-        }), l(".stats", {config: d("fadein")}, [l(".stat", {"data-tip": "Seçilmiş kayıt sayısı"}, [l("span.title", "seçili"), l("span.value", e.winners.selected.length)]), l(".stat", {"data-tip": "Bu kanaldaki kayıt sayısı"}, [l("span.title", "kanal"), l("span.value", e.winners.currentChannel().length)]), l(".stat", {"data-tip": "Bütün kanallardaki kayıt sayısı"}, [l("span.title", "toplam"), l("span.value", r(e.winners))]), l(".stat", {"data-tip": "Veri kullanıldı"}, [l("span.title", "" + s(chrome.storage.local.QUOTA_BYTES)), l("span.value", s(e.winners.used))]), l(".spacer"), l("button.action", {
+        }), l(".stats", {config: d("fadein")}, [l(".stat", {"data-tip": chrome.i18n.getMessage("SELECTED_TIP")}, [l("span.title", chrome.i18n.getMessage("SELECTED_TITLE")), l("span.value", e.winners.selected.length)]), l(".stat", {"data-tip": chrome.i18n.getMessage("CHANNEL_TIP")}, [l("span.title", chrome.i18n.getMessage("CHANNEL_TITLE")), l("span.value", e.winners.currentChannel().length)]), l(".stat", {"data-tip": chrome.i18n.getMessage("TOTAL_TIP")}, [l("span.title", chrome.i18n.getMessage("TOTAL_TITLE")), l("span.value", r(e.winners))]), l(".stat", {"data-tip": chrome.i18n.getMessage("USED_MEMORY_TIP")}, [l("span.title", "" + s(chrome.storage.local.QUOTA_BYTES)), l("span.value", s(e.winners.used))]), l(".spacer"), l("button.action", {
             onclick: i,
-            "data-tip": "Seçili kayıtları sil"
-        }, [c("trash"), "sil"])])]
+            "data-tip": chrome.i18n.getMessage("DELETE_SELECTED_TIP")
+        }, [c("trash"), chrome.i18n.getMessage("DELETE_SELECTED_TITLE")])])]
     }
 
     function r(e) {
@@ -2788,17 +2789,17 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
         var e = 1e3, t = 60 * e, n = 60 * t, i = 24 * n, r = 7 * i, s = Date.now(), o = s - t, l = s - n, c = s - i,
             u = s - r, h = (new Date).getFullYear();
         return function (r) {
-            if (r > o) return a(m((s - r) / e), "saniye");
-            if (r > l) return a(m((s - r) / t), "dakika");
-            if (r > c) return a(m((s - r) / n), "saat");
-            if (r > u) return a(m((s - r) / i), "gün");
+            if (r > o) return a(m((s - r) / e), chrome.i18n.getMessage("TIME_SECOND"));
+            if (r > l) return a(m((s - r) / t), chrome.i18n.getMessage("TIME_MINUTE"));
+            if (r > c) return a(m((s - r) / n), chrome.i18n.getMessage("TIME_HOUR"));
+            if (r > u) return a(m((s - r) / i), chrome.i18n.getMessage("TIME_DAY"));
             var d = new Date(r);
             return d.getFullYear() === h ? d.toLocaleString(navigator.language, {month: "short"}) + " " + d.toLocaleString(navigator.language, {day: "2-digit"}) : d.toLocaleDateString()
         }
     }
 
     function a(e, t) {
-        return e + " " + t + (1 === e ? "" : "") + " önce"
+        return e + " " + t + (1 === e ? "" : chrome.i18n.getMessage("TIME_PLURAL_SUFFIX")) + " " + chrome.i18n.getMessage("TIME_AGO")
     }
 
     var l = require("lhorie~mithril@v0.1.34"), c = require("tgr/src/js/component/icon.js"),
@@ -2878,11 +2879,11 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
                 mainCalendar: "left",
                 container: void 0,
                 i18n: {
-                    previousMonth: "Geçen Ay",
-                    nextMonth: "Gelecek Ay",
-                    months: "Ocak Şubat Mart Nisan Mayıs Haziran Temmuz Ağustos Eylül Ekim Kasım Aralık".split(" "),
-                    weekdays: "Pazar Pazartesi Salı Çarşamba Perşembe Cuma Cumartesi".split(" "),
-                    weekdaysShort: "Paz Pzt Sal Çar Prş Cum Cmt".split(" ")
+                    previousMonth: chrome.i18n.getMessage("TIME_PREVIOUS_MONTH"),
+                    nextMonth: chrome.i18n.getMessage("TIME_NEXT_MONTH"),
+                    months: chrome.i18n.getMessage("TIME_MONTHS").split(" "),
+                    weekdays: chrome.i18n.getMessage("TIME_WEEKDAYS").split(" "),
+                    weekdaysShort: chrome.i18n.getMessage("TIME_WEEKDAYS_SHORT").split(" ")
                 },
                 theme: null,
                 onSelect: null,
@@ -3151,7 +3152,7 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
     lastReadChangelog: "0.0.0",
     uncheckWinners: !0,
     announceWinner: !0,
-    announceTemplate: "Çekilişi @{name} kazandı!",
+    announceTemplate: chrome.i18n.getMessage("ANNOUNCE_TEMPLATE"),
     keywordAntispam: !1,
     keywordAntispamLimit: 1,
     displayTooltips: !0,
