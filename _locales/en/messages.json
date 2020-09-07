@@ -1,0 +1,310 @@
+{
+    "appName": {
+        "message": "Twitch Giveaways"
+    },
+    "appDescription": {
+        "message": "An awesome giveaway tool for Twitch streamers."
+    },
+    "twitch_giveaways_title": {
+        "message": "Twitch Giveaways"
+    },
+    "options_title": {
+        "message": "Options"
+    },
+    "none_to_roll_from": {
+       "message": "There is none to roll from."
+    },
+    "search_title": {
+        "message": "search..."
+    },
+    "cancel_search": {
+        "message": "Cancel search <kbd>ESC</kbd>"
+    },
+    "giveaway_title": {
+        "message": "Giveaways"
+    },
+    "tab_giveaway_title": {
+        "message": "Giveaways:"
+    },
+    "winner_title": {
+        "message": "Winner"
+    },
+    "recent_winners_title": {
+        "message": "Recent Winners"
+    },
+    "donate_title": {
+        "message": "Donate"
+    },
+    "settings_title": {
+        "message": "Settings"
+    },
+    "min_bits_title": {
+        "message": "Min bits"
+    },
+    "subs_time_title": {
+        "message": "Subscribed time"
+    },
+    "subs_luck_title": {
+        "message": "Subscriber luck"
+    },
+    "uncheck_winner": {
+        "message": "Uncheck winner"
+    },
+    "uncheck_winner_desc": {
+        "message": "...so she/he cannot win twice."
+    },
+    "announce_winner": {
+        "message": "Announce winner"
+    },
+    "forbidden_words": {
+        "message": "Forbidden words"
+    },
+    "forbidden_words_placeholder": {
+        "message": "forbidden,words,like,this"
+    },
+    "forbidden_words_desc": {
+        "message": "Who uses that words won't be added to giveaway."
+    },
+    "reset_tip": {
+        "message": "Reset eligible status<br><small>Checks all unchecked people.</small>"
+    },
+    "roll_title": {
+        "message": "Roll"
+    },
+    "all_title": {
+        "message": "All"
+    },
+    "all_tip": {
+        "message": "Everybody join!<br><small>Everybody joins to giveaway since you opened this window.</small>"
+    },
+    "active_title": {
+        "message": "Active"
+    },
+    "active_tip": {
+        "message": "Only active people!<br><small>Make a giveaway from who chatted recently.</small>"
+    },
+    "active_timeout": {
+        "message": "Active timeout"
+    },
+    "keyword_title": {
+        "message": "Keyword"
+    },
+    "keyword_tip": {
+        "message": "Type keyword to enter!<br><small>Make a giveaway from who typed your keyword in chat.</small>"
+    },
+    "keyword_placeholder": {
+        "message": "Enter keyword..."
+    },
+    "clean_tip": {
+        "message": "Clean all entries<br><small>Makes people enter the keyword again.</small>"
+    },
+    "cancel_tip": {
+        "message": "Cancel keyword <kbd>ESC</kbd>"
+    },
+    "keyword_case_sensitive_title": {
+        "message": "Case sensitive"
+    },
+    "keyword_case_sensitive_desc_1": {
+        "message": "Casing"
+    },
+    "keyword_case_sensitive_desc_2": {
+        "message": "matters!"
+    },
+    "keyword_case_sensitive_desc_3": {
+        "message": "doesn't matter!"
+    },
+    "keyword_antispam_title": {
+        "message": "Keyword antispam"
+    },
+    "keyword_antispam_desc": {
+        "message": "Uncheck people who enter keyword more than one."
+    },
+    "api_warning_desc": {
+        "message": "Something is wrong.<br><small>Maybe Twitch is down?</small>"
+    },
+    "api_following": {
+        "message": "Following"
+    },
+    "api_subscribed": {
+        "message": "Subscribed"
+    },
+    "giveaway_reroll": {
+        "message": "Reroll"
+    },
+    "winner_messages_tip": {
+        "message": "Messages since being rolled."
+    },
+    "winner_messages_title": {
+        "message": "Messages"
+    },
+    "winner_answer_time_tip": {
+        "message": "Response time<br><small>Time between roll and first message.</small>"
+    },
+    "profile": {
+        "message": "Profile"
+    },
+    "from_title": {
+        "message": "From:"
+    },
+    "to_title": {
+        "message": "To:"
+    },
+    "date_title": {
+        "message": "date"
+    },
+    "selected_title": {
+        "message": "selected"
+    },
+    "selected_tip": {
+        "message": "Number of selected records"
+    },
+    "channel_title": {
+        "message": "channel"
+    },
+    "channel_tip": {
+        "message": "Number of records in this channel"
+    },
+    "total_title": {
+        "message": "total"
+    },
+    "total_tip": {
+        "message": "Number of records in all channels"
+    },
+    "used_memory_tip": {
+        "message": "Data used"
+    },
+    "delete_selected_tip": {
+        "message": "Clear selected records"
+    },
+    "delete_selected_title": {
+        "message": "clear"
+    },
+    "time_second": {
+        "message": "second"
+    },
+    "time_minute": {
+        "message": "minute"
+    },
+    "time_hour": {
+        "message": "hour"
+    },
+    "time_day": {
+        "message": "day"
+    },
+    "time_plural_suffix": {
+        "message": "s"
+    },
+    "time_ago": {
+        "message": "ago"
+    },
+    "time_previous_month": {
+        "message": "Previous Month"
+    },
+    "time_next_month": {
+        "message": "Next Month"
+    },
+    "time_months": {
+        "message": "January February March April May June July August September October November December"
+    },
+    "time_weekdays": {
+        "message": "Sunday Monday Tuesday Wednesday Thursday Friday Saturday"
+    },
+    "time_weekdays_short": {
+        "message": "Sun Mon Tue Wed Thu Fri Sat"
+    },
+    "announce_template": {
+        "message": "the winner is @{name}!"
+    },
+    "make_a_donation": {
+        "message": "Make a donation (BTC):"
+    },
+    "subscribed_time_desc": {
+        "message": "Add * to search section to make sub-only giveaway."
+    },
+    "subscriber_luck_desc_1": {
+        "message": "Subscribers"
+    },
+    "subscriber_luck_desc_2": {
+        "message": "times more likely to win"
+    },
+    "subscriber_luck_desc_3": {
+        "message": " get no special treatment"
+    },
+    "settings": {
+        "message": "Settings"
+    },
+    "announce_winner_desc": {
+        "message": "Change template in:"
+    },
+    "active_timeout_tip": {
+        "message": "Only people who spoke in the last 20 minutes."
+    },
+    "hours_short": {
+        "message": "h"
+    },
+    "minutes_short": {
+        "message": "m"
+    },
+    "empty_list_placeholder_h1": {
+        "message": "Recent winners"
+    },
+    "empty_list_placeholder_h2": {
+        "message": "Persistent list of all the users that have been rolled in the past."
+    },
+    "empty_list_placeholder_h3": {
+        "message": "Currently empty."
+    },
+    "delete_selected_records": {
+        "message": "Are you sure? This will delete selected records. ($records$)",
+        "placeholders": {
+            "records": {
+                "content": "$1"
+            }
+        }
+    },
+    "config_uncheck_winners": {
+        "message": "When enabled, winners are automatically unchecked to not win twice."
+    },
+    "config_announce_template": {
+        "message": "Announce template"
+    },
+    "config_announce_template_code": {
+        "message": "winner's name"
+    },
+    "config_announce_winner_desc": {
+        "message": "Announce winner in Twitch chat."
+    },
+    "banned_users": {
+        "message": "Banned users"
+    },
+    "banned_users_desc": {
+        "message": "Separate usernames with new lines."
+    },
+    "banned_users_placeholder": {
+        "message": "enter names here..."
+    },
+    "display_tooltips": {
+        "message": "Display tooltips"
+    },
+    "display_tooltips_desc": {
+        "message": "You can hide tooltips if you know what is what."
+    },
+    "options_h1": {
+        "message": "Quick access button channels"
+    },
+    "options_h2": {
+        "message": "Lower cased channel name on each line creates a shortcut."
+    },
+    "options_h3": {
+        "message": "Shortcuts are displayed in the small menu after clicking the extension button in the Chrome bar.<br>If there is only one channel shortcut, it will be opened immediately.<br>You can get channel names from their URLs. For example:<br><code>https://www.twitch.tv/<strong>channel_name</strong></code>"
+    },
+    "options_saved": {
+        "message": "Saved"
+    },
+    "popup_h1": {
+        "message": "Add channel shortcuts in"
+    },
+    "popup_h2": {
+        "message": "Options"
+    }
+}

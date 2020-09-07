@@ -1,0 +1,310 @@
+{
+    "appName": {
+        "message": "Twitch Çekilişleri"
+    },
+    "appDescription": {
+        "message": "Twitch yayıncıları için harikulade bir çekiliş oluşturma aracı."
+    },
+    "twitch_giveaways_title": {
+        "message": "Twitch Çekilişleri"
+    },
+    "options_title": {
+        "message": "Seçenekler"
+    },
+    "none_to_roll_from": {
+        "message": "Katılımcı yok ki çekilişin kazananı olsun."
+    },
+    "search_title": {
+        "message": "ara..."
+    },
+    "cancel_search": {
+        "message": "Aramayı iptal et <kbd>ESC</kbd>"
+    },
+    "giveaway_title": {
+        "message": "Çekiliş"
+    },
+    "tab_giveaway_title": {
+        "message": "Çekiliş:"
+    },
+    "winner_title": {
+        "message": "Kazanan"
+    },
+    "recent_winners_title": {
+        "message": "Son Kazananlar"
+    },
+    "donate_title": {
+        "message": "Bağış"
+    },
+    "settings_title": {
+        "message": "Ayarlar"
+    },
+    "min_bits_title": {
+        "message": "En düşük bit"
+    },
+    "subs_time_title": {
+        "message": "Abonelik süresi"
+    },
+    "subs_luck_title": {
+        "message": "Abone şansı"
+    },
+    "uncheck_winner": {
+        "message": "Kazananı çıkar"
+    },
+    "uncheck_winner_desc": {
+        "message": "…ki aynı çekilişi iki defa kazanmasın."
+    },
+    "announce_winner": {
+        "message": "Kazananı duyur"
+    },
+    "forbidden_words": {
+        "message": "Yasaklı kelimeler"
+    },
+    "forbidden_words_placeholder": {
+        "message": "bunun,gibi,yasaklı,kelimeler"
+    },
+    "forbidden_words_desc": {
+        "message": "Bu kelimeleri kullananlar katılamasın."
+    },
+    "reset_tip": {
+        "message": "Katılımları yenile<br><small>Tiklenmemiş olanları yeniden tikler.</small>"
+    },
+    "roll_title": {
+        "message": "Çek"
+    },
+    "all_title": {
+        "message": "Herkes"
+    },
+    "all_tip": {
+        "message": "Herkes katılsın<br><small>Bu pencereyi açtığından beri sohbette herhangi bir şey yazanlar arasından çekiliş yap.</small>"
+    },
+    "active_title": {
+        "message": "Aktif"
+    },
+    "active_tip": {
+        "message": "Aktif izleyicilerden çek<br><small>Yakın zamanda sohbet edenlerden çekiliş yap.</small>"
+    },
+    "active_timeout": {
+        "message": "Zaman aşımı"
+    },
+    "keyword_title": {
+        "message": "Kelime"
+    },
+    "keyword_tip": {
+        "message": "Anahtar kelime üzerinden çekiliş<br><small>Belirlediğin anahtar kelime ile çekilişe katılım sağla.</small>"
+    },
+    "keyword_placeholder": {
+        "message": "Anahtar kelimeyi yaz..."
+    },
+    "clean_tip": {
+        "message": "Bütün katılımları sil<br><small>İzleyicilerin anahtar kelimeyi tekrar yazmalarını sağla.</small>"
+    },
+    "cancel_tip": {
+        "message": "Kelimeyi iptal et <kbd>ESC</kbd>"
+    },
+    "keyword_case_sensitive_title": {
+        "message": "Harf duyarı"
+    },
+    "keyword_case_sensitive_desc_1": {
+        "message": "Büyük/küçük harf"
+    },
+    "keyword_case_sensitive_desc_2": {
+        "message": "duyarlı!"
+    },
+    "keyword_case_sensitive_desc_3": {
+        "message": "fark ettirmiyor!"
+    },
+    "keyword_antispam_title": {
+        "message": "Spam yapanları çıkar"
+    },
+    "keyword_antispam_desc": {
+        "message": "Anahtar kelimeyi birden fazla yazanları çekilişten çıkarır."
+    },
+    "api_warning_desc": {
+        "message": "Bir sıkıntı var<br><small>Twitch çökmüş olabilir.</small>"
+    },
+    "api_following": {
+        "message": "Takip ediyor"
+    },
+    "api_subscribed": {
+        "message": "Abone"
+    },
+    "giveaway_reroll": {
+        "message": "Tekrar çek"
+    },
+    "winner_messages_tip": {
+        "message": "Gönderdiği mesaj sayısı"
+    },
+    "winner_messages_title": {
+        "message": "Mesajlar"
+    },
+    "winner_answer_time_tip": {
+        "message": "Cevap verme zamanı<br><small>Kazandıktan sonra yazdığı ilk mesaj arasında geçen zaman.</small>"
+    },
+    "profile": {
+        "message": "Profil"
+    },
+    "from_title": {
+        "message": "İlk:"
+    },
+    "to_title": {
+        "message": "Son:"
+    },
+    "date_title": {
+        "message": "tarih"
+    },
+    "selected_title": {
+        "message": "seçili"
+    },
+    "selected_tip": {
+        "message": "Seçilmiş kayıt sayısı"
+    },
+    "channel_title": {
+        "message": "kanal"
+    },
+    "channel_tip": {
+        "message": "Bu kanaldaki kayıt sayısı"
+    },
+    "total_title": {
+        "message": "toplam"
+    },
+    "total_tip": {
+        "message": "Bütün kanallardaki kayıt sayısı"
+    },
+    "used_memory_tip": {
+        "message": "Kullanılan veri"
+    },
+    "delete_selected_tip": {
+        "message": "Seçili kayıtları sil"
+    },
+    "delete_selected_title": {
+        "message": "sil"
+    },
+    "time_second": {
+        "message": "saniye"
+    },
+    "time_minute": {
+        "message": "dakika"
+    },
+    "time_hour": {
+        "message": "saat"
+    },
+    "time_day": {
+        "message": "gün"
+    },
+    "time_plural_suffix": {
+        "message": ""
+    },
+    "time_ago": {
+        "message": "önce"
+    },
+    "time_previous_month": {
+        "message": "Geçen Ay"
+    },
+    "time_next_month": {
+        "message": "Gelecek Ay"
+    },
+    "time_months": {
+        "message": "Ocak Şubat Mart Nisan Mayıs Haziran Temmuz Ağustos Eylül Ekim Kasım Aralık"
+    },
+    "time_weekdays": {
+        "message": "Pazar Pazartesi Salı Çarşamba Perşembe Cuma Cumartesi"
+    },
+    "time_weekdays_short": {
+        "message": "Paz Pzt Sal Çar Prş Cum Cmt"
+    },
+    "announce_template": {
+        "message": "Çekilişi @{name} kazandı!"
+    },
+    "make_a_donation": {
+        "message": "Bitcoin üzerinden bağış yapmak için:"
+    },
+    "subscribed_time_desc": {
+        "message": "Sadece aboneler katılsın istiyorsan arama kısmına * yazabilirsin."
+    },
+    "subscriber_luck_desc_1": {
+        "message": "Aboneler"
+    },
+    "subscriber_luck_desc_2": {
+        "message": "kere katılıyor"
+    },
+    "subscriber_luck_desc_3": {
+        "message": "in ekstra şansı yok"
+    },
+    "settings": {
+        "message": "Ayarlar"
+    },
+    "announce_winner_desc": {
+        "message": "Mesajı değiştirmek için:"
+    },
+    "active_timeout_tip": {
+        "message": "Belirlediğin süre içinde en az bir mesaj yazan izleyiciyi bile çekiliş listesine ekler."
+    },
+    "hours_short": {
+        "message": "s"
+    },
+    "minutes_short": {
+        "message": "dk"
+    },
+    "empty_list_placeholder_h1": {
+        "message": "Geçmiş kazananlar"
+    },
+    "empty_list_placeholder_h2": {
+        "message": "Geçmişte çekiliş kazananların listesi burada bulunur."
+    },
+    "empty_list_placeholder_h3": {
+        "message": "Burada bir şey yok... Henüz."
+    },
+    "delete_selected_records": {
+        "message": "Seçilmiş kayıtlar silinsin mi? ($records$)",
+        "placeholders": {
+            "records": {
+                "content": "$1"
+            }
+        }
+    },
+    "config_uncheck_winners": {
+        "message": "İşaretlendiğinde, kazananlar otomatik olarak katılım listesinden çıkarılır ki iki defa kazanmasın."
+    },
+    "config_announce_template": {
+        "message": "Duyuru mesajı"
+    },
+    "config_announce_template_code": {
+        "message": "kazananın ismi"
+    },
+    "config_announce_winner_desc": {
+        "message": "Kazananı kanal sohbetinden duyurur."
+    },
+    "banned_users": {
+        "message": "Yasaklı kullanıcılar"
+    },
+    "banned_users_desc": {
+        "message": "Yeni kullanıcılar için boşluk bırak."
+    },
+    "banned_users_placeholder": {
+        "message": "isimleri buraya yaz..."
+    },
+    "display_tooltips": {
+        "message": "İpuçlarını göster"
+    },
+    "display_tooltips_desc": {
+        "message": "Eğer neyin ne işe yaradığını biliyorsan bunu kapatabilirsin."
+    },
+    "options_h1": {
+        "message": "Kanala hızlı erişim butonu"
+    },
+    "options_h2": {
+        "message": "Her satır yeni bir kısayol oluşturur."
+    },
+    "options_h3": {
+        "message": "Kısayollar tarayıcının sağ üstündeki eklentiler kısmında gözükür.<br>Eğer bir kanal kısayolu varsa eklentiye tıkladığında o kanal direkt açılacaktır.<br>Kanal isimlerini Twitch kanallarının URL'lerinden alabilirsin. Örneğin:<br><code>https://www.twitch.tv/<strong>kanal_ismi</strong></code>"
+    },
+    "options_saved": {
+        "message": "Kaydedildi"
+    },
+    "popup_h1": {
+        "message": "Kanal kısayolu eklemek için:"
+    },
+    "popup_h2": {
+        "message": "Seçenekler"
+    }
+}
