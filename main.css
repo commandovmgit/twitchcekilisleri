@@ -511,7 +511,7 @@ ul li {
   background: linear-gradient(black 30%, rgba(255,255,255,0)), linear-gradient(rgba(255,255,255,0), black 70%) 0 100%, radial-gradient(farthest-side at 50% 0, rgba(0,0,0,0.1), rgba(0,0,0,0)), radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,0.1), rgba(0,0,0,0)) 0 100%;
   background-repeat: no-repeat;
   background-color: #0e0e10;
-  background-size: 100% 20px, 100% 20px, 100% 5px, 100% 5px;
+  background-size: 100% 0px, 100% 0px, 100% 5px, 100% 5px;
   background-attachment: local, local, scroll, scroll;
 }
 .section .section-spinner {
@@ -560,7 +560,7 @@ input,
 select,
 textarea {
   vertical-align: middle;
-  background: transparent;
+  background: #0e0e10;
   border: 1px solid #f2f2f2;
   color: white;
 }
@@ -739,6 +739,23 @@ input[type=range]:disabled {
   font-size: 0.9em;
   font-style: italic;
   font-weight: normal;
+}
+.option .li {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: left;
+  width: 50%;
+  height: 3em;
+  margin: 0;
+  color: #fff;
+  text-align: center;
+  border: 1px solid transparent;
+  background: transparent;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  transition: background 100ms ease-out;
+  cursor: pointer;
 }
 .option .description.sameline {
   width: auto;
@@ -1499,7 +1516,7 @@ input[type=range]:disabled {
   background: linear-gradient(black 30%, rgba(255,255,255,0)), linear-gradient(rgba(255,255,255,0), black 70%) 0 100%, radial-gradient(farthest-side at 50% 0, rgba(0,0,0,0.1), rgba(0,0,0,0)), radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,0.1), rgba(0,0,0,0)) 0 100%;
   background-repeat: no-repeat;
   background-color: #0e0e10;
-  background-size: 100% 20px, 100% 20px, 100% 5px, 100% 5px;
+  background-size: 100% 0px, 100% 0px, 100% 5px, 100% 5px;
   background-attachment: local, local, scroll, scroll;
   overflow: auto;
   overflow-x: hidden;
@@ -1609,11 +1626,11 @@ input[type=range]:disabled {
   background: rgba(200,200,200,0.1);
   border: 0;
 }
-/*
-.section.index .groups .btn:last-child {
-  margin-right: 0; 
+
+.section.index .groups .btn:first-child {
+  margin-right: 6.5px; 
 }
-*/
+
 .section.index .groups .btn:hover {
   color: #f2f2f2;
   background: #888;
@@ -1870,7 +1887,7 @@ input[type=range]:disabled {
   background: linear-gradient(black 30%, rgba(255,255,255,0)), linear-gradient(rgba(255,255,255,0), black 70%) 0 100%, radial-gradient(farthest-side at 50% 0, rgba(0,0,0,0.1), rgba(0,0,0,0)), radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,0.1), rgba(0,0,0,0)) 0 100%;
   background-repeat: no-repeat;
   background-color: #0e0e10;
-  background-size: 100% 20px, 100% 20px, 100% 5px, 100% 5px;
+  background-size: 100% 0px, 100% 0px, 100% 5px, 100% 5px;
   background-attachment: local, local, scroll, scroll;
 }
 .section.winners > .winners > .empty {
