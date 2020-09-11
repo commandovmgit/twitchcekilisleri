@@ -3,6 +3,10 @@ Twitch yayıncıları için harikulade bir çekiliş oluşturma aracı. <br><br>
 
 <img src= https://i.imgur.com/FgmvXmj.png> 
 
+## Download
+You can download this extension from the <a href='https://github.com/enharukalo/twitchcekilisleri/releases/'>releases page.</a>
+To install, open the CRX file with your browser.
+
 ## License
 <a href="https://github.com/enharukalo/twitchcekilisleri/blob/master/LICENSE.txt">GPL-3.0</a>
 
