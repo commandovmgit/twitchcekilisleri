@@ -69,13 +69,13 @@ input[type=date]::-webkit-calendar-picker-indicator {
   background: transparent;
 }
 *::-webkit-scrollbar-thumb {
-  background: #f5f5f5;
+  background: #18181b;
 }
 * *:hover::-webkit-scrollbar-thumb {
-  background: #bbb;
+  background: #18181b;
 }
 * *:hover::-webkit-scrollbar-thumb:hover {
-  background: #fff;
+  background: #18181b;
 }
 h2,
 h3 {
@@ -537,6 +537,7 @@ fieldset {
   margin-top: 14px;
   padding: 0;
   border-top: 1px solid #f2f2f2;
+  border-bottom: 1px solid #eee;
 }
 legend {
   margin: 0 auto;
@@ -1180,6 +1181,35 @@ input[type=range]:disabled {
   color: #a1513c;
   background: #fbe9e6;
 }
+.support {
+  display: flex;
+}
+.support .divider {
+  font-size: 0.8em;
+}
+.support a {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  margin: 0;
+  font-size: 18px;
+  text-decoration: none;
+  transition: all 100ms ease-out;
+}
+.support .paypal {
+  color: #009cde;
+}
+.support .paypal:hover {
+  color: #002f86;
+}
+.support .bitcoin {
+  color: #f08f1b;
+}
+.support .bitcoin:hover {
+  color: #ad6b1b;
+}
 .tgr {
   display: flex;
   align-items: stretch;
@@ -1187,8 +1217,7 @@ input[type=range]:disabled {
   height: 100%;
   z-index: 1;
   color: #fff;
-/*  background: #0e0e10;
-*/  transition: left 300ms ease-out;
+  transition: left 300ms ease-out;
 }
 .tgr .bar {
   flex-shrink: 0;
@@ -1540,9 +1569,9 @@ input[type=range]:disabled {
   margin: 0;
   color: #fff;
   text-align: center;
-  border: 1px solid transparent;
+  border: 1px solid #3a3a3d;
   background: transparent;
-  border-right: 1px solid rgba(255,255,255,0.1);
+  border-right: 1px solid #3a3a3d;
   transition: background 100ms ease-out;
   cursor: pointer;
 }
@@ -1621,14 +1650,34 @@ input[type=range]:disabled {
 .section.index .groups .btn {
   justify-content: flex-start;
   flex: 1;
-  margin-right: 6.9px;
+  margin-right: 11px;
   color: #888;
   background: rgba(200,200,200,0.1);
   border: 0;
 }
 
 .section.index .groups .btn:first-child {
-  margin-right: 6.5px; 
+  margin-right: 10px; 
+}
+
+.section.index .groups .btn:last-child {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.section.index .groups .btn:nth-child(3) {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+.section.index .groups .btn:nth-child(4) {
+  margin-right: 11px;
+  flex: 0;
+  padding: 0 4.4em 0 0.7em; 
+}
+.section.index .groups .btn:nth-child(5) {
+  margin-right: 11px;
+  padding: 0px 16px 0px 0.7em;
+  flex: 0;
 }
 
 .section.index .groups .btn:hover {
@@ -1738,7 +1787,6 @@ input[type=range]:disabled {
   overflow: auto;
   overflow-x: hidden;
   animation-delay: 300ms;
-  background: linear-gradient(black 30%, rgba(255,255,255,0)), linear-gradient(rgba(255,255,255,0), black 70%) 0 100%, radial-gradient(farthest-side at 50% 0, rgba(0,0,0,0.1), rgba(0,0,0,0)), radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,0.1), rgba(0,0,0,0)) 0 100%;
   background-repeat: no-repeat;
   background-color: #0e0e10;
   background-size: 100% 20px, 100% 20px, 100% 5px, 100% 5px;
@@ -2010,6 +2058,7 @@ body {
   width: calc(100% - 570px);
   height: 100%;
   z-index: 3;
+  background-color: #18181b;
 }
 #chat-not-loaded {
   position: absolute;

@@ -5,7 +5,7 @@
         "name": "Enhar Ukalo",
         "url": "https://github.com/enharukalo"
     },
-    "version": "2.6",
+    "version": "2.7",
     "manifest_version": 2,
     "default_locale": "en",
     "icons": {
@@ -20,7 +20,10 @@
         "*://*.jtvnw.net/*",
         "http://www.w3.org/*"
     ],
-    "content_security_policy": "script-src 'self' 'unsafe-eval';object-src 'self';",
+    "content_security_policy": "script-src 'self' https://www.google-analytics.com 'unsafe-eval';object-src 'self';",
+    "background": {
+      "page": "background.html"
+    },
     "browser_action": {
         "default_popup": "popup.html"
     },

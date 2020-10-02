@@ -1369,9 +1369,11 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
         i = n ? n[1].toLowerCase() : null,
         r = document.querySelector("#chat");
     if(i === null){
-        return;
+        return; 
     }
-    r.src = "https://www.twitch.tv/embed/" + i + "/chat?darkpopout" + "&parent=" + "localhost", document.querySelector("title").textContent = chrome.i18n.getMessage("TAB_GIVEAWAY_TITLE") + " " + i, setTimeout(function () {
+    r.src = "https://www.twitch.tv/embed/" + i + "/chat?parent=localhost&darkpopout=true", 
+    document.querySelector("title").textContent = chrome.i18n.getMessage("TAB_GIVEAWAY_TITLE") + " " + i, 
+    setTimeout(function () {
         var e = r.style.position;
         r.style.position = "static", setTimeout(function () {
             r.style.position = e
@@ -1464,7 +1466,7 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
             minBits: 0,
             subscribedTime: 0,
             forbiddenWords: [],
-            groups: {broadcaster: !0, staff: !0, mod: !0, subscriber: !0, vip: !0, user: !0}
+            groups: {broadcaster: !0, staff: !0, mod: !0, vip: !0, subscriber: !0, user: !0}
         }, this.winner = null, this.messages = new u, this.winners.connect(), this.setter.on("options", function (e) {
             localStorage[x.config.storageName] = JSON.stringify(e)
         }), this.updateSelectedUsers = function () {
@@ -1515,7 +1517,7 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
                 x.winners.add({
                     name: s.name,
                     displayName: s.displayName || s.name,
-                    title: e ? e.status : "couldn't retrieve stream title"
+                    title: e ? e.data[0].title : "couldn't retrieve stream title"
                 })
             })
         }, this.components = new c(this).use(require("tgr/src/js/component/userlist.js"), this.selectedUsers), this.section = new h(this).use(require("tgr/src/js/section/index.js")).use(require("tgr/src/js/section/winners.js")).use(require("tgr/src/js/section/config.js")).use(require("tgr/src/js/section/changelog.js")).use(require("tgr/src/js/section/about.js")).use(require("tgr/src/js/section/profile.js")).use(require("tgr/src/js/section/bitcoin.js")), this.section.on("active", this.messages.clear.bind(this.messages)), this.toSection = function (e, t) {
@@ -1548,10 +1550,6 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
             onmousedown: e.toSection("winners"),
             "data-tip": chrome.i18n.getMessage("RECENT_WINNERS_TITLE")
         }, [s("trophy-list")]), r("div", {
-            class: e.classWhenActive("bitcoin", "button config", "active"),
-            onmousedown: e.toSection("bitcoin"),
-            "data-tip": chrome.i18n.getMessage("DONATE_TITLE")
-        }, [s("bitcoin")]), r("div", {
             class: e.classWhenActive("config", "button config", "active"),
             onmousedown: e.toSection("config"),
             "data-tip": chrome.i18n.getMessage("SETTINGS_TITLE")
@@ -1731,7 +1729,7 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
     }
 }), require.register("tgr/src/js/lib/channel.js", function (e, t) {
     function n(e) {
-        Object.assign(d, {displayName: e.display_name, id: e._id}), d.emit("load"), d.loadBadges()
+        Object.assign(d, {displayName: e.data[0].broadcaster_name, id: e.data[0].broadcaster_id}), d.emit("load"), d.loadBadges()
     }
 
     function i(e) {
@@ -2076,12 +2074,21 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
     s(o);
     var i = t.exports = {
         api: "https://api.twitch.tv/kraken",
+        helixapi: "https://api.twitch.tv/helix",
         clientID: "fgvqq7j6nhahgbxa10sagf5at2exal",
+        bearerTOKEN: "Bearer qb0my0aujfwxcfidn80rz8ugxzje96", // no scope token
         timeout: 1e4,
         request: function (e) {
             return n.request({
                 method: "GET", url: i.api + e, background: !0, config: function (e) {
                     e.setRequestHeader("Client-ID", i.clientID), e.setRequestHeader("Accept", "application/vnd.twitchtv.v5+json"), setTimeout(e.abort.bind(e), i.timeout)
+                }
+            })
+        },
+        requestHelix: function (e) {
+            return n.request({
+                method: "GET", url: i.helixapi + e, background: !0, config: function (e) {
+                    e.setRequestHeader("Client-ID", i.clientID), e.setRequestHeader("Authorization", i.bearerTOKEN), setTimeout(e.abort.bind(e), i.timeout)
                 }
             })
         },
@@ -2091,7 +2098,7 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
                 url: "https://badges.twitch.tv/v1/badges" + e + "/display",
                 background: !0,
                 config: function (e) {
-                    e.setRequestHeader("Client-ID", i.clientID), e.setRequestHeader("Accept", "application/vnd.twitchtv.v5+json"), setTimeout(e.abort.bind(e), i.timeout)
+                    e.setRequestHeader("Client-ID", i.clientID), e.setRequestHeader("Accept", "application/vnd.twitchtv.v5+json"), e.setRequestHeader("Authorization", i.bearerTOKEN),setTimeout(e.abort.bind(e), i.timeout)
                 }
             })
         },
@@ -2100,31 +2107,31 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
         },
         userToID: function(e) {
             e = i.toID(e);
-            return i.request("/users?login=" + e).then(function (e) {
-                return e.users[0]._id
+            return i.requestHelix("/users?login=" + e).then(function (e) {
+                return e.data[0].id
             })
         },
         following: function (e, t) {
             var data = {userName: e, channelName: t};
             return i.userToID(data.userName).then(function (result) {
                 return data.userID = result, i.userToID(data.channelName).then(function (result) {
-                    return data.channelID = result, i.request("/users/" + data.userID + "/follows/channels/" + data.channelID)
+                    return data.channelID = result, i.requestHelix("/users/follows?from_id=" + data.userID + "&to_id=" + data.channelID)
                 })
             })
         },
         profile: function (e) {
             return i.userToID(e).then(function (e) {
-                return i.request("/users/" + e)
+                return i.requestHelix("/users?id=" + e)
             })
         },
         channel: function (e) {
             return i.userToID(e).then(function (e) {
-                return i.request("/channels/" + e)
+                return i.requestHelix("/channels?broadcaster_id=" + e)
             })
         },
         stream: function (e) {
-            return i.request("/streams/" + e).then(function (e) {
-                return e.stream
+            return i.requestHelix("/streams/" + e).then(function (e) {
+                return e.data[0]
             })
         },
         pageType: function () {
@@ -2158,10 +2165,11 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
     }
 }), require.register("tgr/src/js/model/user.js", function (e, t) {
     function n(e) {
-        i.call(this), this.group = "user", this.eligible = !0, this.badges = [], this.broadcaster = !1, this.staff = !1, this.admin = !1, this.sub = this.subscriber, this.subscriber = !1, this.mod = !1, this.vip = !1, this.turbo = !1, this.bits = 0, this.subscribedTime = 0, this.extend(e), this.id = this.name, this.channelURL = s + "/" + this.id, this.profileURL = this.channelURL, this.messageURL = s + "/message/compose?to=" + this.id, this.lastMessage = new Date
+        i.call(this), this.group = "user", this.eligible = !0, this.badges = [], this.broadcaster = !1, this.staff = !1, this.admin = !1, this.sub = this.subscriber, this.subscriber = !1, this.mod = !1, this.vip = !1, this.turbo = !1, this.bits = 0, this.subscribedTime = 0, this.extend(e), this.id = this.name, this.channelURL = s + "/" + this.id, this.profileURL = this.channelURL, this.messageURL = "https://www.twitch.tv/popout/" + d.name + "/viewercard/" + this.id, this.lastMessage = new Date
     }
 
     var i = require("tgr/src/js/model/model.js"), r = require("component~inherit@0.0.3"),
+        d = require("tgr/src/js/lib/channel.js"),
         s = (require("tgr/src/js/lib/twitch.js"), "https://twitch.tv");
     t.exports = n, r(n, i);
     var o = n.prototype;
@@ -2345,6 +2353,27 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
 
     var i = require("lhorie~mithril@v0.1.34"), r = require("tgr/src/js/lib/animate.js");
     t.exports = {name: "bitcoin", view: n}
+}), require.register("tgr/src/js/component/support.js", function(e, t) {
+    function n(e, t) {
+        return i(".support", {
+            "data-tip": t ? t : ""
+        }, [i("a.paypal", {
+            href: "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2F5GNJ3UC39CL",
+            target: "_blank",
+            config: s("slideinleft", 50)
+        }, [r("paypal"), "PayPal"]), i("a.bitcoin", {
+            href: "#",
+            onmousedown: e.toSection("bitcoin"),
+            config: s("slideinleft", 100)
+        }, [r("bitcoin"), "Bitcoin"])])
+    }
+    var i = require("lhorie~mithril@v0.1.34"),
+        r = require("tgr/src/js/component/icon.js"),
+        s = require("tgr/src/js/lib/animate.js");
+    t.exports = {
+        name: "support",
+        view: n
+    }
 }), require.register("tgr/src/js/section/changelog.js", function (e, t) {
     function n() {
         this.releases = require("tgr/data/changelog.json").map(i), this.isNewVersion && (this.setter("isNewVersion")(!1), this.setter("options.lastReadChangelog")(this.version))
@@ -2385,12 +2414,18 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
         var e = this;
         this.updateIgnoreList = function (t) {
             e.setter("options.ignoreList")(t.split("\n").map(n))
+        },
+        this.updateForbiddenWords = function (t) {
+            e.setter("options.forbiddenWords")(t.split("\n").map(n))
         }
     }
 
     function r(e) {
         var t = 0;
-        return [s("article.option.uncheck-winners", {
+        return [s("fieldset.begging", [s("legend", {
+            config: a("fadein", 100)
+        }, chrome.i18n.getMessage("MAKE_A_TIP")), require("tgr/src/js/component/support.js").view(e)
+        ]), s("article.option.uncheck-winners", {
             key: "option-uncheck-winners",
             config: a("slideinleft", 50 * t++)
         }, [s("label", {onmousedown: l(1, e.setter("options.uncheckWinners").to(!e.options.uncheckWinners))}, chrome.i18n.getMessage("UNCHECK_WINNER")), o(e.options.uncheckWinners ? "check" : "close", {
@@ -2419,14 +2454,24 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
             max: 5,
             oninput: s.withAttr("value", e.setter("options.keywordAntispamLimit").type("number")),
             value: e.options.keywordAntispamLimit
-        }) : null, e.options.keywordAntispam ? s("span.meta", e.options.keywordAntispamLimit) : null, s("p.description", chrome.i18n.getMessage("KEYWORD_ANTISPAM_DESC"))]), s("article.option.ignore-list", {
+        }) : null, e.options.keywordAntispam ? s("span.meta", e.options.keywordAntispamLimit) : null, s("p.description", chrome.i18n.getMessage("KEYWORD_ANTISPAM_DESC"))]), 
+            s("article.option.ignore-list", {
             key: "option-ignore-list",
             config: a("slideinleft", 50 * t++)
         }, [s("label[for=option-ignore-list]", [chrome.i18n.getMessage("BANNED_USERS"), s("p.description", chrome.i18n.getMessage("BANNED_USERS_DESC"))]), s("textarea#option-ignore-list", {
             placeholder: chrome.i18n.getMessage("BANNED_USERS_PLACEHOLDER"),
             oninput: s.withAttr("value", e.updateIgnoreList),
             value: e.options.ignoreList.join("\n")
-        })]), s("article.option.display-tooltips", {
+        })]), s("article.option.forbiddenWords", {
+            key: "forbiddenWords",
+            config: a("slideinleft", 50 * t++)
+        }, [s("label[for=forbiddenWords]", [chrome.i18n.getMessage("FORBIDDEN_WORDS"), s("p.description", chrome.i18n.getMessage("FORBIDDEN_WORDS_DESC"))]), s("textarea#forbiddenWords", {
+            value: e.options.forbiddenWords,
+            placeholder: chrome.i18n.getMessage("FORBIDDEN_WORDS_PLACEHOLDER"),
+            oninput: s.withAttr("value", e.updateForbiddenWords),
+            onkeydown: l(27, e.setter("options.forbiddenWords").to(""))
+        })]), 
+            s("article.option.display-tooltips", {
             key: "option-display-tooltips",
             config: a("slideinleft", 50 * t++)
         }, [s("label", {onmousedown: l(1, e.setter("options.displayTooltips").to(!e.options.displayTooltips))}, chrome.i18n.getMessage("DISPLAY_TOOLTIPS")), o(e.options.displayTooltips ? "check" : "close", {
@@ -2501,15 +2546,7 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
         }, [l("label", {onmousedown: h(1, e.setter("options.announceWinner").to(!e.options.announceWinner))}, chrome.i18n.getMessage("ANNOUNCE_WINNER")), c(e.options.announceWinner ? "check" : "close", {
             class: "checkbox" + (e.options.announceWinner ? " checked" : ""),
             onmousedown: h(1, e.setter("options.announceWinner").to(!e.options.announceWinner))
-        }), l("p.description.sameline", chrome.i18n.getMessage("ANNOUNCE_WINNER_DESC"), [l('a[href="#"', {onmousedown: e.toSection("config")}, " ", chrome.i18n.getMessage("SETTINGS"))])]), l(".option", {
-            key: "forbiddenWords",
-            config: d("slideinleft", 50 * t++)
-        }, [l("label[for=forbiddenWords]", chrome.i18n.getMessage("FORBIDDEN_WORDS")), l("input[type=text]#forbiddenWords", {
-            value: e.options.forbiddenWords,
-            placeholder: chrome.i18n.getMessage("FORBIDDEN_WORDS_PLACEHOLDER"),
-            oninput: l.withAttr("value", e.setter("options.forbiddenWords")),
-            onkeydown: h(27, e.setter("options.forbiddenWords").to(""))
-        }), l("p.description.sameline", [chrome.i18n.getMessage("FORBIDDEN_WORDS_DESC")])])]), l(".block.actions", [l(".btn.btn-info.reset", {
+        }), l("p.description.sameline", chrome.i18n.getMessage("ANNOUNCE_WINNER_DESC"), [l('a[href="#"', {onmousedown: e.toSection("config")}, " ", chrome.i18n.getMessage("SETTINGS"))])]), ]), l(".block.actions", [l(".btn.btn-info.reset", {
             config: d("slideinleft", 50 * t++),
             onmousedown: h(1, e.resetEligible),
             "data-tip": chrome.i18n.getMessage("RESET_TIP")
@@ -2612,20 +2649,27 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
 }), require.register("tgr/src/js/section/profile.js", function (e, t) {
     function n(e) {
         function t(t) {
-            t && (t.channel ? e.following = !0 : 404 === t.status && (e.following = !1)), c()
+            if (t)
+            if (t.total === 1)  {
+                e.following = true;
+            }
+            else {
+                e.following = false; 
+            }
+            c();
         }
 
         function n(t) {
-            if (t && t.name === e.name) {
-                if (e.profile = t, !t.logo) return e.avatar = null, u();
+            if (t && t.login === e.login) {
+                if (e.profile = t, !t.data[0].profile_image_url) return e.avatar = null, u();
                 var n = function () {
-                    e.avatar = t.logo, u()
+                    e.avatar = t.data[0].profile_image_url, u()
                 }, i = function () {
                     e.avatar = null, u()
                 };
-                o("img", {onload: n, onerror: i, src: t.logo})
+                o("img", {onload: n, onerror: i, src: t.data[0].profile_image_url})
             } else u()
-        }
+        }   
 
         function i() {
             a.loading = !1, s.redraw()
@@ -2656,6 +2700,12 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
             clearInterval(m)
         }
     }
+    function openUserLog(e) {
+        var n = e.user;
+        return function () {
+            window.open(n.messageURL, 'Chatlog', 'resizable=1,width=400,height=600')
+        }
+    }
 
     function i(e) {
         if (e.loading) return [s(".section-spinner")];
@@ -2674,9 +2724,10 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
         }, [a(o ? "check" : "close", "status"), chrome.i18n.getMessage("API_SUBSCRIBED")])]), s("aside.lower", [s(".action.sliding", {
             onmousedown: u(1, e.roll),
             config: c("slideinright", 300)
-        }, [s("span.name", chrome.i18n.getMessage("GIVEAWAY_REROLL")), a("reload")]), s("", {
+        }, [s("span.name", chrome.i18n.getMessage("GIVEAWAY_REROLL")), a("reload")]), s("a.action.sliding", {
+            onclick: openUserLog(e),
             config: c("slideinleft", 300)
-        }, [a(""), s("span.name", "")])])])]), s(".messages", [s("h2.title", {config: c("slideinleft", 50 * t++ + 200)}, [s("span.name", {"data-tip": chrome.i18n.getMessage("WINNER_MESSAGES_TIP")}, [a("speech-bubble"), " ", chrome.i18n.getMessage("WINNER_MESSAGES_TITLE"), " ", s("span.count", n.messages.length)]), s("span.clock" + (n.respondedAt ? ".paused" : ""), {"data-tip": chrome.i18n.getMessage("WINNER_ANSWER_TIME_TIP")}, [s("span.minutes", h.minutes), s("span.colon", ":"), s("span.seconds", String("00" + h.seconds).substr(-2))])]), s("ul.list.fadein", {config: e.messagesScrolling}, n.messages.slice(-100).map(r, e))])]
+        }, [a("envelope"), s("span.name", "Mesaj geçmişi")])])])]), s(".messages", [s("h2.title", {config: c("slideinleft", 50 * t++ + 200)}, [s("span.name", {"data-tip": chrome.i18n.getMessage("WINNER_MESSAGES_TIP")}, [a("speech-bubble"), " ", chrome.i18n.getMessage("WINNER_MESSAGES_TITLE"), " ", s("span.count", n.messages.length)]), s("span.clock" + (n.respondedAt ? ".paused" : ""), {"data-tip": chrome.i18n.getMessage("WINNER_ANSWER_TIME_TIP")}, [s("span.minutes", h.minutes), s("span.colon", ":"), s("span.seconds", String("00" + h.seconds).substr(-2))])]), s("ul.list.fadein", {config: e.messagesScrolling}, n.messages.slice(-100).map(r, e))])]
     }
 
     function r(e) {
@@ -2727,14 +2778,6 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
                 title: chrome.i18n.getMessage("PROFILE")
             }, c("user")), l(".time", {title: new Date(r.time).toLocaleString()}, g(r.time))]), l(".title", w ? l.trust(r.title.replace(w, '<span class="query">$1</span>')) : r.title), l("button.delete", {onclick: n(r.id)}, [c("trash")])])
         }
-/*
-, l("a.message", {
-                href: "https://www.twitch.tv/message/compose?to=" + r.name,
-                target: "_blank",
-                title: "Mesaj gönder"
-            }, c("envelope"))
-*/
-
 
         function f() {
             return l(".empty", {key: "empty-list-placeholder"}, [l("h2", chrome.i18n.getMessage("EMPTY_LIST_PLACEHOLDER_H1")), l("p", chrome.i18n.getMessage("EMPTY_LIST_PLACEHOLDER_H2")), l("p", chrome.i18n.getMessage("EMPTY_LIST_PLACEHOLDER_H3"))])

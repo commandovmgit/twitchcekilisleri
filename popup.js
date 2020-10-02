@@ -44,3 +44,4 @@ var q = document.querySelector.bind(document), defaults = {quickAccessChannels: 
 loadChannels(), chrome.storage.onChanged.addListener(loadChannels), document.addEventListener("DOMContentLoaded", loadChannels), document.querySelector("#to-options").addEventListener("click", function (e) {
     e.preventDefault(), chrome.runtime.openOptionsPage()
 });
+

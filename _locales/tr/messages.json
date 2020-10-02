@@ -111,7 +111,7 @@
         "message": "duyarlı!"
     },
     "keyword_case_sensitive_desc_3": {
-        "message": "fark ettirmiyor!"
+        "message": "fark etmiyor!"
     },
     "keyword_antispam_title": {
         "message": "Spam yapanları çıkar"
@@ -218,6 +218,9 @@
     "make_a_donation": {
         "message": "Bitcoin üzerinden bağış yapmak için:"
     },
+    "make_a_tip": {
+        "message": "Bağış"
+    },
     "subscribed_time_desc": {
         "message": "Sadece aboneler katılsın istiyorsan arama kısmına * yazabilirsin."
     },
@@ -269,7 +272,7 @@
         "message": "Duyuru mesajı"
     },
     "config_announce_template_code": {
-        "message": "kazananın ismi"
+        "message": " kazananın ismi"
     },
     "config_announce_winner_desc": {
         "message": "Kazananı kanal sohbetinden duyurur."
@@ -306,5 +309,11 @@
     },
     "popup_h2": {
         "message": "Seçenekler"
+    },
+    "background_title": {
+        "message": "Twitch Cekilisleri"
+    },
+    "main_chatnotloaded": {
+        "message": "<p>Kanal sohbeti yükleniyor, eğer bu uzun sürerse <strong>F5</strong> (sayfayı yenile) tuşuna basın.</p>"
     }
 }
