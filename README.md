@@ -1,7 +1,7 @@
 # Twitch Çekilişleri / Twitch Giveaways
 Twitch yayıncıları için harikulade bir çekiliş oluşturma aracı. <br><br>An awesome giveaway tool for Twitch streamers.
 
-<img src= https://i.imgur.com/FgmvXmj.png> 
+<img src="https://i.imgur.com/9CD7dR4.png"> 
 
 ## Download
 You can download this extension from the <a href='https://github.com/enharukalo/twitchcekilisleri/releases/'>releases page.</a>
