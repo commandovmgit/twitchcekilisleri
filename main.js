@@ -2727,7 +2727,7 @@ require.loader = "component", require.helper = {}, require.helper.semVerSort = f
         }, [s("span.name", chrome.i18n.getMessage("GIVEAWAY_REROLL")), a("reload")]), s("a.action.sliding", {
             onclick: openUserLog(e),
             config: c("slideinleft", 300)
-        }, [a("envelope"), s("span.name", "Mesaj geçmişi")])])])]), s(".messages", [s("h2.title", {config: c("slideinleft", 50 * t++ + 200)}, [s("span.name", {"data-tip": chrome.i18n.getMessage("WINNER_MESSAGES_TIP")}, [a("speech-bubble"), " ", chrome.i18n.getMessage("WINNER_MESSAGES_TITLE"), " ", s("span.count", n.messages.length)]), s("span.clock" + (n.respondedAt ? ".paused" : ""), {"data-tip": chrome.i18n.getMessage("WINNER_ANSWER_TIME_TIP")}, [s("span.minutes", h.minutes), s("span.colon", ":"), s("span.seconds", String("00" + h.seconds).substr(-2))])]), s("ul.list.fadein", {config: e.messagesScrolling}, n.messages.slice(-100).map(r, e))])]
+        }, [a("envelope"), s("span.name", chrome.i18n.getMessage("USER_VIEWERCARD"))])])])]), s(".messages", [s("h2.title", {config: c("slideinleft", 50 * t++ + 200)}, [s("span.name", {"data-tip": chrome.i18n.getMessage("WINNER_MESSAGES_TIP")}, [a("speech-bubble"), " ", chrome.i18n.getMessage("WINNER_MESSAGES_TITLE"), " ", s("span.count", n.messages.length)]), s("span.clock" + (n.respondedAt ? ".paused" : ""), {"data-tip": chrome.i18n.getMessage("WINNER_ANSWER_TIME_TIP")}, [s("span.minutes", h.minutes), s("span.colon", ":"), s("span.seconds", String("00" + h.seconds).substr(-2))])]), s("ul.list.fadein", {config: e.messagesScrolling}, n.messages.slice(-100).map(r, e))])]
     }
 
     function r(e) {

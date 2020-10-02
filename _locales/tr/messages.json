@@ -131,6 +131,9 @@
     "giveaway_reroll": {
         "message": "Tekrar çek"
     },
+    "user_viewercard": {
+        "message": "Mesaj geçmişi"
+    },
     "winner_messages_tip": {
         "message": "Gönderdiği mesaj sayısı"
     },

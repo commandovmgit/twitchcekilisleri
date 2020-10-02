@@ -131,6 +131,9 @@
     "giveaway_reroll": {
         "message": "Reroll"
     },
+    "user_viewercard": {
+        "message": "Message history"
+    },
     "winner_messages_tip": {
         "message": "Messages since being rolled."
     },
